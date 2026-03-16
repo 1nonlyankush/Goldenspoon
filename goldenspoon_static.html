@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goldenspoon — Premium Catering Experience</title>
+<meta name="description" content="Goldenspoon offers luxury catering services for weddings, corporate events, birthday parties, and private dining. Book your premium catering experience today.">
+<style>
+        /* ===== COLOR SYSTEM — Change these to rebrand ===== */
+        /* :root {
+            --color-primary: #ffffff;
+            --color-secondary: #111111;
+            --color-accent: #80461B;
+            --color-accent-light: #a0612e;
+            --color-accent-dark: #5e3313;
+            --color-gray-light: #f7f5f2;
+            --color-gray: #888;
+            --color-gray-dark: #333;
+        } */
+         :root {
+--color-primary: #ffffff;
+--color-secondary: #111111;
+
+/* Gold Theme */
+--color-accent: #D4AF37;
+--color-accent-light: #F5D76E;
+--color-accent-dark: #B8962E;
+
+--color-gray-light: #F5F5F5;
+--color-gray: #888;
+--color-gray-dark: #333;
+}
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--color-secondary);
+            background: var(--color-primary);
+            line-height: 1.7;
+        }
+
+        /* Utility classes for easy rebranding */
+        .primary-color { color: var(--color-primary); }
+        .secondary-color { color: var(--color-secondary); }
+        .accent-color { color: var(--color-accent); }
+        .bg-primary { background-color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .bg-accent { background-color: var(--color-accent); }
+        .bg-light { background-color: var(--color-gray-light); }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
+
+        a { text-decoration: none; color: inherit; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+            transition: background 0.3s;
+        }
+        .navbar .container {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 80px;
+        }
+        .navbar-logo img { height: 77px; width: auto; }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links a {
+            font-size: 14px; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--color-secondary); transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--color-accent); }
+        .btn-book {
+            background: var(--color-accent);
+            /* basic fallback; specificity overridden by nav-links rules, see below */
+            color: #ffffff;
+            padding: 12px 28px; border-radius: 4px; font-size: 13px;
+            font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+            border: none; cursor: pointer; transition: all 0.3s;
+        }
+        /* ensure link inside nav-links keeps white text even though .nav-links a selector is more specific */
+        .nav-links a.btn-book,
+        .nav-links a.btn-book:hover,
+        .nav-links a.btn-book:active {
+            color: #ffffff !important;
+        }
+        .btn-book:hover { background: var(--color-accent-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(128,70,27,0.3); }
+        .btn-book:active { transform: scale(0.95); }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--color-secondary); transition: 0.3s; }
+
+        /* ===== HERO ===== */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            /* use a background image from the images folder; adjust filename as needed */
+            background: url("/img/herobgjpg.jpeg") center 15% /cover no-repeat;
+        }
+        .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+        .hero-content { position: relative; z-index: 2; max-width: 700px; padding: 0 24px; }
+        .hero-content h1 {
+            font-size: clamp(36px, 5vw, 64px); color: var(--color-primary);
+            margin-bottom: 20px; line-height: 1.15;
+        }
+        .hero-content h1 span { color: var(--color-accent-light); }
+        .hero-content p { color: rgba(255,255,255,0.85); font-size: 18px; margin-bottom: 36px; font-weight: 300; }
+        .btn-hero {
+            display: inline-block; background: var(--color-accent); color: var(--color-primary);
+            padding: 16px 44px; border-radius: 4px; font-size: 14px;
+            font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+            transition: all 0.3s; border: none; cursor: pointer;
+        }
+        .btn-hero:hover { background: var(--color-accent-light); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(128,70,27,0.4); }
+        .btn-hero:active { transform: scale(0.95); }
+
+        /* ===== SECTIONS ===== */
+        .section { padding: 100px 0; }
+        .section-title {
+            text-align: center; margin-bottom: 60px;
+        }
+        .section-title h2 { font-size: 40px; margin-bottom: 12px; }
+        .section-title .divider { width: 60px; height: 3px; background: var(--color-accent); margin: 16px auto; border-radius: 2px; }
+        .section-title p { color: var(--color-gray); max-width: 560px; margin: 0 auto; font-size: 16px; }
+
+        /* ===== ABOUT ===== */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-img { border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .about-img img { width: 100%; height: 400px; object-fit: cover; display: block; }
+        .about-text h3 { font-size: 28px; margin-bottom: 20px; }
+        .about-text p { color: var(--color-gray-dark); margin-bottom: 16px; }
+
+        /* ===== SERVICES ===== */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+        .service-card {
+            background: var(--color-primary); border-radius: 16px;
+            overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            transition: all 0.4s; cursor: pointer;
+        }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+        .service-card img { width: 100%; height: 200px; object-fit: cover; }
+        .service-card-body { padding: 24px; text-align: center; }
+        .service-card-body h4 { font-size: 20px; margin-bottom: 8px; }
+        .service-card-body p { font-size: 14px; color: var(--color-gray); }
+
+        /* ===== MENU ===== */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+        .category-card {
+            position: relative; border-radius: 16px; overflow: hidden;
+            height: 320px; border: 2px solid transparent; transition: border-color 0.3s;
+            text-decoration: none; display: block;
+        }
+        .category-card:hover { border-color: #D4AF37; }
+        .category-card img { width: 100%; height: 100%; object-fit: cover; border-radius:0; transition: transform 0.5s; }
+        .category-card:hover img { transform: scale(1.08); }
+        .category-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            display: flex; align-items: flex-end; padding: 28px;
+        }
+        .category-overlay h3 { color: var(--color-primary); font-size: 24px; }
+
+        .items-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; max-width: 1200px; margin: 0 auto; }
+        .item-card {
+            background: var(--color-primary); border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s;
+            height: 320px;
+        }
+        .item-card:hover { transform: translateY(-4px); }
+        .item-card img { width: 100%; height: 240px; object-fit: cover; }
+        .item-card h4 { padding: 16px; text-align: center; font-size: 18px; color: var(--color-secondary); }
+
+        .back-btn { background: var(--color-accent); color: var(--color-primary); border: none; padding: 10px 20px; border-radius: 4px; font-size: 16px; cursor: pointer; margin-bottom: 20px; }
+
+        /* ===== GALLERY ===== */
+        .gallery-carousel { position: relative; max-width: 1100px; margin: 0 auto; padding: 24px 0; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; gap: 16px; }
+        .gallery-item { border-radius: 16px; overflow: hidden; background: var(--color-primary); box-shadow: 0 10px 30px rgba(0,0,0,0.12); opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
+        .gallery-item.visible { opacity: 1; transform: translateY(0); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        .gallery-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 44px; height: 44px; border-radius: 50%;
+            border: 2px solid rgba(212,175,55,0.9); background: rgba(212,175,55,0.95);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: #111; z-index: 5;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .gallery-nav:hover { background: rgba(212,175,55,1); }
+        .gallery-nav:hover svg { transform: scale(1.1); }
+        .gallery-nav.disabled { opacity: 0.35; cursor: default; transform: none; }
+        .gallery-nav svg { width: 18px; height: 18px; }
+        .gallery-nav.left { left: -24px; }
+        .gallery-nav.right { right: -24px; }
+
+        @media (max-width: 900px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-nav.left { left: -18px; }
+            .gallery-nav.right { right: -18px; }
+        }
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 300px; }
+            .gallery-nav.left, .gallery-nav.right { display: block; }
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .contact-info { display: flex; flex-direction: column; gap: 28px; }
+        .contact-item { display: flex; gap: 16px; align-eligible: flex-start; }
+        .contact-icon {
+            width: 48px; height: 48px; border-radius: 50%; background: var(--color-accent);
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .contact-icon svg { width: 20px; height: 20px; fill: var(--color-primary); }
+        .contact-item h4 { font-size: 16px; margin-bottom: 4px; }
+        .contact-item p { font-size: 14px; color: var(--color-gray); }
+
+        .contact-form { display: flex; flex-direction: column; gap: 16px; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 14px 18px; border: 1px solid #ddd; border-radius: 8px;
+            font-family: 'Lato', sans-serif; font-size: 15px; transition: border-color 0.3s;
+            background: var(--color-primary);
+        }
+        /* date inputs might show default styling; reinforce color theme */
+        .contact-form input[type="date"] {
+            color: var(--color-secondary);
+        }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--color-accent); }
+        .contact-form textarea { resize: vertical; min-height: 120px; }
+        .success-message { font-size: 18px; color: var(--color-secondary); text-align: center; margin-bottom: 20px; }
+        .btn-submit {
+            background: var(--color-accent); color: var(--color-primary);
+            padding: 14px 36px; border: none; border-radius: 8px;
+            font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.3s; align-self: flex-start;
+        }
+        .btn-submit:hover { background: var(--color-accent-dark); transform: translateY(-2px); }
+
+        /* ===== FOOTER ===== */
+        .footer { background: var(--color-secondary); padding: 60px 0 30px; color: rgba(255,255,255,0.7); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer h4 { color: var(--color-primary); font-size: 18px; margin-bottom: 16px; }
+        .footer p { font-size: 14px; line-height: 1.8; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--color-accent-light); }
+        .social-icons { display: flex; gap: 12px; margin-top: 16px; }
+        .social-icons a {
+            width: 40px; height: 40px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2); display: flex;
+            align-items: center; justify-content: center; transition: all 0.3s;
+        }
+        .social-icons a:hover { background: var(--color-accent); border-color: var(--color-accent); }
+        .social-icons svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.8); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; text-align: center; font-size: 13px; }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; position: absolute; top: 80px; left: 0; right: 0; background: var(--color-primary); flex-direction: column; padding: 24px; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+            .nav-links.active { display: flex; }
+            .hamburger { display: flex; }
+        }
+        @media (max-width: 600px) {
+            .section { padding: 60px 0; }
+            .section-title h2 { font-size: 30px; }
+            .hero-content h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+    <div class="container">
+        <a href="#home" class="navbar-logo">
+            <img src="/img/logo.png" alt="Goldenspoon Logo">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="https://wa.me/918192019191?text=i%20need%20catering" target="_blank" class="btn-book">Book Now</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content fade-up visible">
+        <h1>Premium <span>Catering</span> Experience</h1>
+        <p>Exquisite culinary artistry for weddings, corporate events, and private celebrations. Every dish crafted with passion, every moment made unforgettable.</p>
+        <a href="https://wa.me/918192019191?text=i%20need%20catering" target="_blank" class="btn-hero">Book Catering</a>
+    </div>
+</section>
+
+<!-- About -->
+<section class="section bg-light" id="about">
+    <div class="container">
+        <div class="section-title fade-up visible">
+            <h2>About <span class="accent-color">Goldenspoon</span></h2>
+            <div class="divider"></div>
+        </div>
+        <div class="about-grid">
+            <div class="about-img fade-up visible">
+                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Goldenspoon catering setup">
+            </div>
+            <div class="about-text fade-up visible">
+                <h3>Where Taste Meets <span class="accent-color">Celebration</span></h3>
+                <p>Founded in 2021, Golden Spoon is dedicated to delivering memorable catering experiences for every occasion. The company is led by MOHD Kamran, who brings over 20 years of experience in the hospitality industry, including 6 years of specialized catering expertise.</p>
+                <p>From intimate gatherings to grand celebrations, we create carefully crafted menus that combine rich flavors, quality ingredients, and elegant presentation to make every event special. Our focus on taste, service, and hospitality has helped Golden Spoon become a trusted choice for premium catering.</p>
+                <!-- <p>Our commitment to sourcing the finest ingredients, impeccable presentation, and warm hospitality has made us the most trusted name in premium catering.</p> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="section" id="services">
+    <div class="container">
+        <div class="section-title fade-up visible">
+            <h2>Our <span class="accent-color">Services</span></h2>
+            <div class="divider"></div>
+            <p>Tailored catering solutions for every occasion, delivered with elegance and precision.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card fade-up visible">
+                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Wedding Catering">
+                <div class="service-card-body">
+                    <h4>Wedding Catering</h4>
+                    <p>Make your special day truly magical with our bespoke wedding menus and flawless service.</p>
+                </div>
+            </div>
+            <div class="service-card fade-up visible">
+                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Corporate Events">
+                <div class="service-card-body">
+                    <h4>Corporate Events</h4>
+                    <p>Impress clients and colleagues with sophisticated dining experiences for business events.</p>
+                </div>
+            </div>
+            <div class="service-card fade-up visible">
+                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Birthday Parties">
+                <div class="service-card-body">
+                    <h4>Birthday Parties</h4>
+                    <p>Celebrate milestones with vibrant, delicious spreads that delight guests of all ages.</p>
+                </div>
+            </div>
+            <div class="service-card fade-up visible">
+                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Private Dining">
+                <div class="service-card-body">
+                    <h4>Private Dining</h4>
+                    <p>Exclusive chef-curated dining experiences in the comfort of your own space.</p>
+                </div>
+            </div>
+            <div class="service-card fade-up visible">
+                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Buffet Catering">
+                <div class="service-card-body">
+                    <h4>Buffet Catering</h4>
+                    <p>Lavish buffet setups with diverse cuisines to satisfy every craving.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Menu -->
+<section class="section bg-light" id="menu">
+    <div class="container">
+        <div class="section-title fade-up">
+            <h2>Our <span class="accent-color">Menu Categories</span></h2>
+            <div class="divider"></div>
+            <p>Discover our diverse menu categories, each featuring authentic regional specialties.</p>
+        </div>
+        <div class="menu-grid">
+            <div class="category-card" onclick="showCategory('sweetcounter')">
+                <img src="/img/sweetcounter.jpg" alt="Sweet Counter">
+                <div class="category-overlay"><h3>Sweet Counter</h3></div>
+            </div>
+            <div class="category-card" onclick="showCategory('regionalcuisine')">
+                <img src="/img/regionalcuisine.jpg" alt="Regional Cuisine">
+                <div class="category-overlay"><h3>Regional Cuisine</h3></div>
+            </div>
+            <div class="category-card" onclick="showCategory('livefood')">
+                <img src="/img/livefoodstation.jpg" alt="Live Food Stations">
+                <div class="category-overlay"><h3>Live Food Stations</h3></div>
+            </div>
+            <div class="category-card" onclick="showCategory('beverages')">
+                <img src="/img/beverages.jpg" alt="Beverage Counter">
+                <div class="category-overlay"><h3>Beverage Counter</h3></div>
+            </div>
+            <div class="category-card" onclick="showCategory('specialty')">
+                <img src="/img/specialtycounter.jpg" alt="Specialty Counter">
+                <div class="category-overlay"><h3>Specialty Counter</h3></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sweet Counter -->
+<section class="section bg-light" id="sweetcounter" style="display: none;">
+    <div class="container">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu Categories</button>
+        <div class="section-title fade-up">
+            <h2>Sweet <span class="accent-color">Counter</span></h2>
+            <div class="divider"></div>
+            <p>Indulge in our exquisite selection of traditional sweets.</p>
+        </div>
+        <div class="items-grid">
+            <div class="item-card fade-up">
+                <img src="/img/vrindavansweets.jpg" alt="Vrindavan Special Sweets">
+                <h4>Vrindavan Special Sweets</h4>
+            </div>
+            <div class="item-card fade-up">
+                <img src="/img/agraspecialsweet.jpg" alt="Agra Special Sweets">
+                <h4>Agra Special Sweets</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Regional Cuisine -->
+<section class="section" id="regionalcuisine" style="display: none;">
+    <div class="container">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu Categories</button>
+        <div class="section-title fade-up">
+            <h2>Regional <span class="accent-color">Cuisine</span></h2>
+            <div class="divider"></div>
+            <p>Explore authentic flavors from different regions of India.</p>
+        </div>
+        <div class="items-grid">
+            <div class="item-card fade-up">
+                <img src="/img/lucknowzayka.jpg" alt="Lucknow Ka Zaika">
+                <h4>Lucknow Ka Zaika</h4>
+            </div>
+            <div class="item-card fade-up">
+                <img src="/img/rajasthanidhaba.jpg" alt="Rajasthani Dhaba">
+                <h4>Rajasthani Dhaba</h4>
+            </div>
+            <div class="item-card fade-up">
+                <img src="/img/punjabidhaba.jpg" alt="Punjabi Dhaba">
+                <h4>Punjabi Dhaba</h4>
+            </div>
+            <div class="item-card fade-up">
+                <img src="/img/desirasoi.jpg" alt="Desi Rasoi">
+                <h4>Desi Rasoi</h4>
+            </div>
+            <div class="item-card fade-up">
+                <img src="/img/delhispecialcuisine.jpg" alt="Delhi Special Cuisine">
+                <h4>Delhi Special Cuisine</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Live Food Stations -->
+<section class="section bg-light" id="livefood" style="display: none;">
+    <div class="container">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu Categories</button>
+        <div class="section-title fade-up">
+            <h2>Live Food <span class="accent-color">Stations</span></h2>
+            <div class="divider"></div>
+            <p>Experience freshly prepared dishes at our live cooking stations.</p>
+        </div>
+        <div class="items-grid">
+            <div class="item-card fade-up">
+                <img src="/img/aligarhbarbecue.jpg" alt="Aligarh Special Barbecue">
+                <h4>Aligarh Special Barbecue</h4>
+            </div>
+            <div class="item-card fade-up">
+                <img src="/img/bareillybakery.jpg" alt="Bareilly Special Bakery">
+                <h4>Bareilly Special Bakery</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Beverage Counter -->
+<section class="section" id="beverages" style="display: none;">
+    <div class="container">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu Categories</button>
+        <div class="section-title fade-up">
+            <h2>Beverage <span class="accent-color">Counter</span></h2>
+            <div class="divider"></div>
+            <p>Refresh yourself with our wide range of beverages and desserts.</p>
+        </div>
+        <div class="items-grid">
+            <div class="item-card fade-up">
+                <img src="/img/multiplecoffee.jpg" alt="Multiple Style Coffee">
+                <h4>Multiple Style Coffee</h4>
+            </div>
+            <div class="item-card fade-up">
+                <img src="/img/softdrinks.jpg" alt="Soft Drinks">
+                <h4>Soft Drinks</h4>
+            </div>
+            <div class="item-card fade-up">
+                <img src="/img/icecreams.jpg" alt="Ice Creams">
+                <h4>Ice Creams</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Specialty Counter -->
+<section class="section bg-light" id="specialty" style="display: none;">
+    <div class="container">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu Categories</button>
+        <div class="section-title fade-up">
+            <h2>Specialty <span class="accent-color">Counter</span></h2>
+            <div class="divider"></div>
+            <p>Discover our unique specialty offerings.</p>
+        </div>
+        <div class="items-grid">
+            <div class="item-card fade-up">
+                <img src="/img/haryanapaan.jpg" alt="Haryana Ka Paan">
+                <h4>Haryana Ka Paan</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section class="section" id="gallery">
+    <div class="container">
+        <div class="section-title fade-up">
+            <h2>Our <span class="accent-color">Gallery</span></h2>
+            <div class="divider"></div>
+            <p>A glimpse into the world of Goldenspoon experiences.</p>
+        </div>
+        <div class="gallery-carousel">
+            <button class="gallery-nav left" id="galleryPrev" aria-label="Previous">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </button>
+            <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
+            <button class="gallery-nav right" id="galleryNext" aria-label="Next">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="section bg-light" id="contact">
+    <div class="container">
+        <div class="section-title fade-up">
+            <h2>Get In <span class="accent-color">Touch</span></h2>
+            <div class="divider"></div>
+            <p>Ready to create an unforgettable experience? Reach out to us today.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info fade-up">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"></path></svg>
+                    </div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+91 8192019191</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+                    </div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@goldenspoon.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"></path></svg>
+                    </div>
+                    <div>
+                        <h4>Address</h4>
+                        <p>123 Gourmet Lane, New Delhi, India 110001</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form fade-up" action="https://formspree.io/f/xkoqbjnr" method="POST" onsubmit="handleSubmit(event)">
+                <input type="text" name="Name" placeholder="Your Name" required>
+                <input type="tel" name="Phone" placeholder="Phone Number" required>
+                <input type="email" name="Email" placeholder="Your Email" required>
+                <input type="date" name="EventDate" placeholder="Event date" required>
+                <input type="number" name="Guests" placeholder="Number of Guests" min="1">
+                <textarea placeholder="Tell us about event" ></textarea>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4>Goldenspoon</h4>
+                <p>Crafting extraordinary culinary experiences since 2010. We bring passion, precision, and premium quality to every event we cater.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+                    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M16 4H8a4 4 0 00-4 4v8a4 4 0 004 4h8a4 4 0 004-4V8a4 4 0 00-4-4zm-4 11a3 3 0 110-6 3 3 0 010 6zm4.5-7.5a1 1 0 110-2 1 1 0 010 2z"></path></svg></a>
+                    <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 7.5v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path></svg></a>
+                    <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"></path><path d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z" fill="#111"></path></svg></a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">Wedding Catering</a></li>
+                    <li><a href="#services">Corporate Events</a></li>
+                    <li><a href="#services">Birthday Parties</a></li>
+                    <li><a href="#services">Private Dining</a></li>
+                    <li><a href="#services">Buffet Catering</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Goldenspoon. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+
+    // Scroll fade-up animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Gallery paging
+    const galleryImages = Array.from({ length: 24 }, (_, i) => `/img/gallery${i + 1}.jpeg`);
+    const galleryGrid = document.getElementById('galleryGrid');
+    const prevBtn = document.getElementById('galleryPrev');
+    const nextBtn = document.getElementById('galleryNext');
+    let currentPage = 0;
+
+    function getImagesPerPage() {
+        return window.innerWidth <= 768 ? 1 : 6;
+    }
+
+    function renderGallery() {
+        const imagesPerPage = getImagesPerPage();
+        const start = currentPage * imagesPerPage;
+        const pageImages = galleryImages.slice(start, start + imagesPerPage);
+        galleryGrid.innerHTML = pageImages.map(src => `
+            <div class="gallery-item">
+                <img src="${src}" alt="Gallery image">
+            </div>
+        `).join('');
+
+        // Apply fade-in to newly rendered items
+        requestAnimationFrame(() => {
+            galleryGrid.querySelectorAll('.gallery-item').forEach(el => el.classList.add('visible'));
+        });
+
+        const totalPages = Math.ceil(galleryImages.length / imagesPerPage);
+        prevBtn.classList.toggle('disabled', currentPage === 0);
+        nextBtn.classList.toggle('disabled', currentPage >= totalPages - 1);
+    }
+
+    prevBtn.addEventListener('click', () => {
+        if (currentPage === 0) return;
+        currentPage -= 1;
+        renderGallery();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        const imagesPerPage = getImagesPerPage();
+        const totalPages = Math.ceil(galleryImages.length / imagesPerPage);
+        if (currentPage >= totalPages - 1) return;
+        currentPage += 1;
+        renderGallery();
+    });
+
+    window.addEventListener('resize', () => {
+        // Reset to first page on resize
+        currentPage = 0;
+        renderGallery();
+    });
+
+    renderGallery();
+
+    // Menu category toggle
+    function showCategory(id) {
+        document.querySelector('.menu-grid').style.display = 'none';
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function backToMenu() {
+        document.querySelector('.menu-grid').style.display = 'grid';
+        document.querySelectorAll('#sweetcounter, #regionalcuisine, #livefood, #beverages, #specialty').forEach(section => {
+            section.style.display = 'none';
+        });
+    }
+
+    // Contact form
+    function handleSubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        const container = form.parentElement;
+        const data = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+            if (response.ok) {
+                container.innerHTML = `
+                    <p class="success-message">Your message has been sent successfully!!, we will contact you soon.</p>
+                    <a href="https://wa.me/918192019191" target="_blank" class="btn-hero">Chat with us on WhatsApp</a>
+                `;
+            } else {
+                alert('Oops! There was a problem submitting your form.');
+            }
+        })
+        .catch(() => alert('Oops! There was a problem submitting your form.'));
+    }
+</script>
+
+</body>
+</html>
